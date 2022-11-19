@@ -1,0 +1,24 @@
+<sprint 1 = Package : board>
+
+>>>files:
+
+control file:
+    -function tied to the board canvas
+    -uses board's canvas to get user inputs
+    -moves pieces
+    -when the user moves a piece, the piece must follow
+        the user's mouse
+
+>>>class
+
+Board class :
+    -contains the state of the boardin real time
+    -contains canvas of the chess board
+    -checks if a move is legal
+    -keeps moves history
+    -can be reset
+
+>>>function
+
+set_mode function:
+    -change the controls according to the game mode
