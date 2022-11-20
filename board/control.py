@@ -16,7 +16,7 @@ _current_piece_case = None
 _current_image = None
 _current_image_id = None
 
-def click(case_size, board, draw_function, canvas, event):
+def click(case_size, board, isfliped, draw_function, canvas, event):
     """
     input:
         -case_size : int
@@ -36,7 +36,7 @@ def click(case_size, board, draw_function, canvas, event):
         global _current_piece_case
         global _current_image
         global _current_image_id
-        _current_piece_case = get_case_number(event.x, event.y, case_size)
+        _current_piece_case = get_case_number(event.x, event.y, case_size, isfliped)
         _current_piece = board.piece_at(_current_piece_case)
         if not (_current_piece is None):
             if _current_piece.color is _color_to_move:
@@ -51,7 +51,7 @@ def click(case_size, board, draw_function, canvas, event):
                 _current_image = None
                 _current_image_id = None
 
-def release(case_size, draw_function, board, event):
+def release(case_size, draw_function, isfliped, board, event):
     """
     input:
         -case_size : int
@@ -69,7 +69,7 @@ def release(case_size, draw_function, board, event):
         global _current_image
         global _current_image_id
 
-        target_square = get_case_number(event.x, event.y, case_size)
+        target_square = get_case_number(event.x, event.y, case_size, isfliped)
         _input_handler(target_square, board)
 
         _current_piece = None
@@ -94,19 +94,18 @@ def _default_input_handler(target_square, board):
     Default game mode : user play both black and white with
     queen autopromote on
     """
-    global _color_to_move
     def _get_promotion_type():
         return chess.QUEEN
     move = chess.Move(_current_piece_case, target_square)
     promotion_move = chess.Move(_current_piece_case, target_square, promotion=chess.QUEEN)
     if board.board.is_legal(move):
         board.board.push(move)
-        _color_to_move = not _color_to_move
+        change_color_to_move()
     if board.board.is_legal(promotion_move):
         promotion_piece_type = _get_promotion_type()
         promotion_move = chess.Move(_current_piece_case, target_square, promotion=promotion_piece_type)
         board.board.push(promotion_move)
-        _color_to_move = not _color_to_move
+        change_color_to_move()
 
 def set_input_handler(function):
     """
@@ -120,4 +119,12 @@ def set_input_handler(function):
     global _input_handler
     _input_handler = function
 
+
 set_input_handler(_default_input_handler)
+
+def get_color_to_move():
+    return _color_to_move
+
+def change_color_to_move():
+    global _color_to_move
+    _color_to_move = not _color_to_move
