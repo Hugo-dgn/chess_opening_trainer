@@ -67,7 +67,30 @@ set_mode function:
 
 ### final implementation of sprint 1 ###
 
-<sprint 2 = Package : create>
+<sprint 2 = Pavkage : opening>
+
+Design the data structure use to store openings and repertoire
+
+>>> file
+
+manager file:
+    -save opening
+    -load opening
+
+>>> class
+
+class Opening:
+    -represent a opening
+    -have a name
+    -the opening is represented by a tree
+
+class Node:
+    -use to represent a opening's tree
+    -each node is labeled by a move
+    -have parent (None if root)
+    -have children ([] if end node)
+
+<sprint 3 = Package : create>
 
 Allow player to enter new openings to the database. The first
 implementation of this function will be with command lignes.
