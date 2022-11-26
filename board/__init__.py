@@ -24,7 +24,7 @@ class Board:
 
         self.board = chess.Board()
         self.canvas = _image.draw_board(root, case_size)
-        self.is_fliped = True
+        self.is_fliped = False
 
         self._current_image = []
 
