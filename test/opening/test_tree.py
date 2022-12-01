@@ -89,3 +89,34 @@ def test_get_similar_nodes():
 
     assert (assertion_1_1 or assertion_1_2)
     assert (assertion_2_1 or assertion_2_2)
+
+def test_link_nodes():
+    board = chess.Board()
+    op_tree = opening.Node(None, None, [])
+
+    move_1_w_1 = chess.Move.from_uci("e2e4")
+    move_2_w_1 = chess.Move.from_uci("e7e5")
+    move_3_w_1 = chess.Move.from_uci("a2e4")
+
+    op_tree.add(move_1_w_1)
+    op_tree.childrens[0].add(move_2_w_1)
+    op_tree.childrens[0].childrens[0].add(move_3_w_1)
+
+    move_1_w_2 = chess.Move.from_uci("e2e3")
+    move_2_w_2 = chess.Move.from_uci("e7e6")
+    move_3_w_2 = chess.Move.from_uci("e3e4")
+    move_4_w_2 = chess.Move.from_uci("e6e5")
+
+    op_tree.add(move_1_w_2)
+    op_tree.childrens[1].add(move_2_w_2)
+    op_tree.childrens[1].childrens[0].add(move_3_w_2)
+    op_tree.childrens[1].childrens[0].childrens[0].add(move_4_w_2)
+
+    node = op_tree.childrens[1].childrens[0].childrens[0].childrens[0]
+
+    similar_nodes = tree.get_similar_nodes(node)
+
+    assert len(op_tree.childrens[1].childrens[0].childrens[0].childrens[0].childrens) == 0
+    tree.link_nodes(similar_nodes)
+    assert len(op_tree.childrens[1].childrens[0].childrens[0].childrens[0].childrens) == 1
+    assert op_tree.childrens[1].childrens[0].childrens[0].childrens[0].childrens is op_tree.childrens[0].childrens[0].childrens

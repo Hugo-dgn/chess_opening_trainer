@@ -59,3 +59,28 @@ def get_similar_nodes(node):
             aux(child, chess.Board(fen=board.fen()))
     aux(root, chess.Board())
     return similar_nodes
+
+def link_nodes(similar_nodes):
+    """
+    inputs:
+        -similar_nodes : Node list
+    output:
+        -None
+    Sum childrens and parents of the nodes in similar_nodes
+    into two list and then assign those childrens and parents
+    to each node
+    """
+    childrens = []
+    parents = []
+    for node in similar_nodes:
+        for child in node.childrens:
+            if child not in childrens:
+                childrens.append(child)
+
+        for parent in node.parents:
+            if parent not in parents:
+                parents.append(parent)
+    
+    for node in similar_nodes:
+        node.childrens = childrens
+        node.parents = parents
