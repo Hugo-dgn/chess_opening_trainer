@@ -33,11 +33,10 @@ class Opening:
 
 class Node:
 
-    def __init__(self, move, parents, childrens, depth = 0):
+    def __init__(self, move, parents, childrens):
         self.move = move
         self.parents = parents
         self.childrens = childrens
-        self.depth = depth
     
     def add(self, move):
         """
@@ -50,5 +49,12 @@ class Node:
         is already reach in another branch, if it is it links
         the children of the nodes together
         """
-        next_node = Node(move, [self], [], self.depth+1)
+        next_node = Node(move, [self], [])
         self.childrens.append(next_node)
+    
+    def __repr__(self):
+        if self.move is None:
+            uci = None
+        else:
+            uci = self.move.uci()
+        return f"{uci} : {self.childrens}"

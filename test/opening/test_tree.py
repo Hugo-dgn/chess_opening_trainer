@@ -47,3 +47,45 @@ def test_get_board():
     _board = tree.get_board(op_tree.childrens[-1].childrens[-1])
 
     assert board.fen() == _board.fen()
+
+def test_same_positon():
+    fen1 = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+    fen2 = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 2"
+    fen3 = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 12 2"
+    assert tree.same_position(fen1, fen2)
+    assert tree.same_position(fen1, fen3)
+
+def test_get_similar_nodes():
+    board = chess.Board()
+    op_tree = opening.Node(None, None, [])
+
+    move_1_w_1 = chess.Move.from_uci("e2e4")
+    move_2_w_1 = chess.Move.from_uci("e7e5")
+
+    op_tree.add(move_1_w_1)
+    op_tree.childrens[0].add(move_2_w_1)
+
+    move_1_w_2 = chess.Move.from_uci("e2e3")
+    move_2_w_2 = chess.Move.from_uci("e7e6")
+    move_3_w_2 = chess.Move.from_uci("e3e4")
+    move_4_w_2 = chess.Move.from_uci("e6e5")
+
+    op_tree.add(move_1_w_2)
+    op_tree.childrens[1].add(move_2_w_2)
+    op_tree.childrens[1].childrens[0].add(move_3_w_2)
+    op_tree.childrens[1].childrens[0].childrens[0].add(move_4_w_2)
+
+    node = op_tree.childrens[1].childrens[0].childrens[0].childrens[0]
+
+    similar_node = tree.get_similar_nodes(node)
+
+    assert len(similar_node) == 2
+
+    assertion_1_1 = similar_node[0] is op_tree.childrens[0].childrens[0]
+    assertion_1_2 = similar_node[1] is op_tree.childrens[0].childrens[0]
+
+    assertion_2_1 = similar_node[0] is op_tree.childrens[1].childrens[0].childrens[0].childrens[0]
+    assertion_2_2 = similar_node[1] is op_tree.childrens[1].childrens[0].childrens[0].childrens[0]
+
+    assert (assertion_1_1 or assertion_1_2)
+    assert (assertion_2_1 or assertion_2_2)

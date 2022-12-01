@@ -1,5 +1,11 @@
 import chess
 
+
+def same_position(fen1, fen2):
+    fen1 = "".join(fen1.split()[:-3])
+    fen2 = "".join(fen2.split()[:-3])
+    return fen1 == fen2
+
 def get_root(node):
     """
     input:
@@ -17,6 +23,8 @@ def get_board(node):
     """
     input:
         -node : opening.Node
+    output:
+        -board : chess.Board
     """
     moves = []
     def aux(_node):
@@ -43,12 +51,11 @@ def get_similar_nodes(node):
     root = get_root(node)
     similar_nodes = []
     def aux(_node, board):
-        if board.move is not None:
+        if _node.move is not None:
             board.push(_node.move)
-        if board.fen == fen:
-            similar_nodes.append(node)
-        else:
-            for child in _node.children:
-                aux(child, chess.Board(fen=board.fen))
-    aux(root, chess.Board)
+        if same_position(board.fen(), fen):
+            similar_nodes.append(_node)
+        for child in _node.childrens:
+            aux(child, chess.Board(fen=board.fen()))
+    aux(root, chess.Board())
     return similar_nodes
