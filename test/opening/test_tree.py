@@ -120,26 +120,3 @@ def test_link_nodes():
     tree.link_nodes(similar_nodes)
     assert len(op_tree.childrens[1].childrens[0].childrens[0].childrens[0].childrens) == 1
     assert op_tree.childrens[1].childrens[0].childrens[0].childrens[0].childrens is op_tree.childrens[0].childrens[0].childrens
-
-
-def test_get_node_ligne():
-    op_tree = tree.get_node_ligne([chess.Move.from_uci("e2e4"),
-                                    chess.Move.from_uci("e7e5")],
-                                    None)
-    assert op_tree.move.uci() == "e2e4"
-    assert len(op_tree.childrens) == 1
-    assert op_tree.childrens[0].move.uci() == "e7e5"
-    assert len(op_tree.childrens[0].childrens) == 0
-
-def test_add_ligne():
-    op = opening.Opening("caro", chess.BLACK)
-    moves = [chess.Move.from_uci("e2e4"),
-            chess.Move.from_uci("e7e5")]
-    tree.add_ligne(op.tree, moves)
-
-    op_tree = op.tree.childrens[0]
-
-    assert op_tree.move.uci() == "e2e4"
-    assert len(op_tree.childrens) == 1
-    assert op_tree.childrens[0].move.uci() == "e7e5"
-    assert len(op_tree.childrens[0].childrens) == 0

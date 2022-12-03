@@ -1,6 +1,7 @@
 import chess
-from .tree import get_root as _get_root
-from .tree import Node as _Node
+
+import opening.manage_ligne as _manage_ligne
+import opening.tree as _tree
 
 class Opening:
     """
@@ -19,7 +20,7 @@ class Opening:
     def __init__(self, name, color):
         self.name = name
         self.color = color
-        self.tree = _Node(None, None, [])
+        self.tree = _tree.Node(None, None, [])
     
     def add(self, ligne):
         """
@@ -28,6 +29,8 @@ class Opening:
             -ligne : chess.Move list
         output:
             -None
-        add a ligne to the opening. 
+        add a ligne to the opening. Must be called each time
+        a new move is make by the user
         """
-        current_node = self.tree
+        node = _manage_ligne.add_ligne(self.tree, ligne)
+        _manage_ligne.clean_ligne(node)

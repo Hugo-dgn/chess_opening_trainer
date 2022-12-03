@@ -101,57 +101,15 @@ def link_nodes(similar_nodes):
         -similar_nodes : Node list
     output:
         -None
-    Sum childrens and parents of the nodes in similar_nodes
-    into two list and then assign those childrens and parents
+    Sum childrens the nodes in similar_nodes
+    into a list and then assign those childrens
     to each node
     """
     childrens = []
-    parents = []
     for node in similar_nodes:
         for child in node.childrens:
             if child not in childrens:
                 childrens.append(child)
-
-        for parent in node.parents:
-            if parent not in parents:
-                parents.append(parent)
     
     for node in similar_nodes:
         node.childrens = childrens
-        node.parents = parents
-
-def get_node_ligne(ligne, parent):
-    """
-    input:
-        -ligne : chess.Move list
-        -parent : Node
-    output:
-        -Node
-    Transform the chess.Move list into a tree
-    """
-    if len(ligne) == 1:
-        return Node(ligne[0], [parent], [])
-    else:
-        node_ligne = Node(ligne[0], [parent], [])
-        next_node = get_node_ligne(ligne[1:], node_ligne)
-        node_ligne.childrens.append(next_node)
-        return node_ligne
-
-def add_ligne(tree, ligne):
-    """
-    input:
-        -tree : Node
-        -ligne : chess.Move list
-    output:
-        -None
-    add a ligne to the tree
-    """
-    if len(ligne) > 0:
-        flag = True
-        for child in tree.childrens:
-            if ligne[0] == child.move:
-                flag = False
-                add_ligne(child, ligne[1:])
-        if flag:
-            node_ligne = get_node_ligne(ligne, tree)
-            tree.childrens.append(node_ligne)
