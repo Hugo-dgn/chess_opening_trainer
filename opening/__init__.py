@@ -1,7 +1,17 @@
 import chess
+import pickle
 
 import opening.manage_ligne as _manage_ligne
 import opening.tree as _tree
+
+def save(op):
+    with open(f"data/{op.name}", "wb") as file:
+        pickle.dump(op, file)
+
+def load(op_name):
+    with open(f"data/{op_name}", "rb") as file:
+        op = pickle.load(file)
+    return op
 
 class Opening:
     """
