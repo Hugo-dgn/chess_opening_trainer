@@ -1,5 +1,6 @@
 import chess
 from .tree import get_root as _get_root
+from .tree import Node as _Node
 
 class Opening:
     """
@@ -18,7 +19,7 @@ class Opening:
     def __init__(self, name, color):
         self.name = name
         self.color = color
-        self.tree = Node(None, None, [])
+        self.tree = _Node(None, None, [])
     
     def add(self, ligne):
         """
@@ -27,34 +28,6 @@ class Opening:
             -ligne : chess.Move list
         output:
             -None
-        add a ligne to the opening"""
-        pass
-        
-
-class Node:
-
-    def __init__(self, move, parents, childrens):
-        self.move = move
-        self.parents = parents
-        self.childrens = childrens
-    
-    def add(self, move):
+        add a ligne to the opening. 
         """
-        input:
-            -self : opening.Node
-            -move : chess.Move
-        output:
-            -None
-        Add a children to the node and check if the position
-        is already reach in another branch, if it is it links
-        the children of the nodes together
-        """
-        next_node = Node(move, [self], [])
-        self.childrens.append(next_node)
-    
-    def __repr__(self):
-        if self.move is None:
-            uci = None
-        else:
-            uci = self.move.uci()
-        return f"{uci} : {self.childrens}"
+        current_node = self.tree
