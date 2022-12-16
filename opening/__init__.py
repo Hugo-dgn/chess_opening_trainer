@@ -43,4 +43,16 @@ class Opening:
         a new move is make by the user
         """
         node = _manage_ligne.add_ligne(self.tree, ligne)
-        _manage_ligne.clean_ligne(node)
+        if node is not None:
+            _manage_ligne.clean_ligne(node)
+    
+    def deleat(self, ligne):
+        """
+        input:
+            -self : Opening class
+            -ligne : chess.Move list
+        output:
+            -None
+        deleat ligne from opening tree
+        """
+        _manage_ligne.deleat_ligne(self.tree, ligne)

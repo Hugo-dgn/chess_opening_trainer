@@ -50,3 +50,22 @@ def test_clean_ligne():
     node_2 = op.tree.childrens[1].childrens[0].childrens[0].childrens[0]
 
     assert node_1.childrens is node_2.childrens
+
+def test_find_node():
+    op = opening.Opening("caro", chess.BLACK)
+    moves = [chess.Move.from_uci("e2e4"),
+                chess.Move.from_uci("e7e5")]
+    op.add(moves)
+
+    node = ma_ligne.find_node(op.tree, moves)
+
+    assert node is op.tree.childrens[0].childrens[0]
+
+def test_deleat_ligne():
+    op = opening.Opening("caro", chess.BLACK)
+    moves = [chess.Move.from_uci("e2e4"),
+            chess.Move.from_uci("e7e5")]
+    op.add(moves)
+
+    ma_ligne.deleat_ligne(op.tree, moves)
+    assert len(op.tree.childrens) == 0

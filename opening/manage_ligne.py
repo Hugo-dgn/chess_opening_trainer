@@ -51,3 +51,36 @@ def clean_ligne(node):
     tree.link_nodes(similar_nodes)
     for child in node.childrens:
         clean_ligne(child)
+
+def find_node(node, ligne):
+    """
+    input:
+        -tree : Node class
+        -ligne : chess.Move list
+    output:
+        -final_node : Node class or None
+    return the last node corresponding to the ligne. If None
+    the ligne is not in the tree
+    """
+    if node.move is None:
+        for start_node in node.childrens:
+            final_node = find_node(start_node, ligne[1:])
+            if final_node is not None:
+                return final_node
+    else:
+        if len(ligne) == 0:
+            return node
+        else:
+            for next_node in node.childrens:
+                if next_node.move == ligne[0]:
+                    return find_node(next_node, ligne[1:])
+
+def deleat_ligne(op_tree, ligne):
+    end_node = find_node(op_tree, ligne)
+    def aux(node):
+        if node.parents is None:
+            return None
+        if len(node.parents) == 1 and len(node.childrens) == 0:
+            node.parents[0].childrens.remove(node)
+            aux(node.parents[0])
+    aux(end_node)
