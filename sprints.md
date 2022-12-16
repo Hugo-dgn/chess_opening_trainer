@@ -34,7 +34,7 @@ set_mode function:
 
 ### final implementation of sprint 1 ###
 
->class board.Board:
+<class board.Board:
     attribute:
         -board : chess.Board
         -canvas : tk.Canvas
@@ -47,25 +47,27 @@ set_mode function:
         -reset : None
             reset the board to starting position and draw it
 
->function set_input_handler(function) : None
+<function set_input_handler(function) : None
     set the function called when when the player moves a piece.
     This function must be :
         function(target_square, board) : None
             -target_square : int
             -board : board.Board
 
->function set_mode(user_to_move) : None
+<function set_mode(user_to_move) : None
     user_to_move = True -> white to move
     user_to_move = False -> Black to move
 
->function get_color_to_move : bool
+<function get_color_to_move : bool
     get_color_to_move() = True -> white to move
     get_color_to_move() = False -> Black to move
 
->function change_color_to_move : None
+<function change_color_to_move : None
     does : user_to_move = not user_to_move
 
 ### final implementation of sprint 1 ###
+
+============================================================
 
 <sprint 2 = Pavkage : opening>
 
@@ -89,6 +91,30 @@ class Node:
     -each node is labeled by a move
     -have parent (None if root)
     -have children ([] if end node)
+
+### final implementation of sprint 2 ###
+
+<class Opening:
+    attribute:
+        -name : str
+        -color : chess.Color
+        -tree : Node
+    method:
+        -add(ligne : chess.Move list) : add a ligne
+        -deleat(ligne : chess.Move list) : deleat a ligne
+
+<function save(op : Opening) : None
+    Save the given opening
+
+<function load(op_name : str) : Opening
+    load the opening corresponding to the given name
+
+<funciton oplist() : str list
+    gives a list of the names of all openings saved
+
+### final implementation of sprint 2 ###
+
+============================================================
 
 <sprint 3 = Package : create>
 

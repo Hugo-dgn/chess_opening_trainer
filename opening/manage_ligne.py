@@ -76,6 +76,15 @@ def find_node(node, ligne):
                     return find_node(next_node, ligne[1:])
 
 def deleat_ligne(op_tree, ligne):
+    """
+    input:
+        -op_tree : Node
+        -ligne : chess.Move list
+    output:
+        -None
+    deleat a ligne from an opening tree. If a Node is in
+    another ligne then this node is not deleated.
+    """
     end_node = find_node(op_tree, ligne)
     def aux(node):
         if node.parents is None:
