@@ -96,14 +96,14 @@ def _default_input_handler(target_square, board):
     """
     def _get_promotion_type():
         return chess.QUEEN
-    move = chess.Move(_current_piece_case, target_square)
-    promotion_move = chess.Move(_current_piece_case, target_square, promotion=chess.QUEEN)
+    move = chess.Move(get_hold_piece_case(), target_square)
+    promotion_move = chess.Move(get_hold_piece_case(), target_square, promotion=chess.QUEEN)
     if board.board.is_legal(move):
         board.board.push(move)
         change_color_to_move()
     if board.board.is_legal(promotion_move):
         promotion_piece_type = _get_promotion_type()
-        promotion_move = chess.Move(_current_piece_case, target_square, promotion=promotion_piece_type)
+        promotion_move = chess.Move(get_hold_piece_case(), target_square, promotion=promotion_piece_type)
         board.board.push(promotion_move)
         change_color_to_move()
 
@@ -124,6 +124,9 @@ set_input_handler(_default_input_handler)
 
 def get_color_to_move():
     return _color_to_move
+
+def get_hold_piece_case():
+    return _current_piece_case
 
 def change_color_to_move():
     global _color_to_move

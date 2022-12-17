@@ -37,6 +37,9 @@ set_mode function:
 <class board.Board:
     attribute:
         -board : chess.Board
+            all moves perform by the programme must
+            be given to this class as the documention
+            of python-chess says
         -canvas : tk.Canvas
         -case_size : int
         -is_fliped : bool
@@ -55,15 +58,18 @@ set_mode function:
             -board : board.Board
 
 <function set_mode(user_to_move) : None
-    user_to_move = True -> white to move
-    user_to_move = False -> Black to move
+    user_to_move = True : user can move pieces
+    user_to_move = False : user cannot move pieces
 
 <function get_color_to_move : bool
-    get_color_to_move() = True -> white to move
-    get_color_to_move() = False -> Black to move
+    get_color_to_move() = True : white to move
+    get_color_to_move() = False : Black to move
 
 <function change_color_to_move : None
     does : user_to_move = not user_to_move
+
+<function get_hold_piece_case : int
+    return the case of the piece selected by the player
 
 ### final implementation of sprint 1 ###
 
@@ -116,19 +122,21 @@ class Node:
 
 ============================================================
 
-<sprint 3 = Package : create>
+<sprint 3 = Package : manage>
 
-Allow player to enter new openings to the database. The first
-implementation of this function will be with command lignes.
+Allow player to enter new openings to the database or deleate them.
+The first implementation of this function will be with command lignes.
 
->>>files:
+>>>files
 
-manager file:
-    -save openings
-    -load openings
+create file:
+    create openings
 
->>>function:
+deleate file:
+    deleate openings
 
-get_new_opening(opening) : None
+>>>functions:
+
+get_new_ligne(opening : Opening) : None
     -update the opening tree in real time
     -use the board to get the moves from the user
