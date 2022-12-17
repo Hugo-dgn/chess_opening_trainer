@@ -1,0 +1,4 @@
+pytest == 7.2.0
+pyyaml == 6.0
+python-chess == 1.999
+Pillow == 9.3.0
