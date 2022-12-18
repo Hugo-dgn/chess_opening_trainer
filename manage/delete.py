@@ -1,6 +1,10 @@
 import opening
+import os
 
-def delete_ligne(op, ligne):
+def delete_op(name : str):
+    os.remove(f"data/{name}.op")
+
+def delete_ligne(op : opening.Opening, ligne : list):
     """
     input:
         -op : opening.Opening
@@ -12,7 +16,7 @@ def delete_ligne(op, ligne):
     op.delete(ligne)
     opening.save(op)
 
-def delete_last_move(op, ligne):
+def delete_last_move(op : opening.Opening, ligne : list):
     """
     input:
         -op : opening.Opening

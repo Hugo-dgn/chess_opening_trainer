@@ -1,2 +1,1 @@
-from .delete import delete_ligne
-from .delete import delete_last_move
+from .delete import delete_op, delete_ligne, delete_last_move
