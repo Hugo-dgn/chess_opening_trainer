@@ -1,4 +1,5 @@
 import tkinter as tk
+import os
 
 from manage.create import update_ligne_handler
 import opening
@@ -14,5 +15,7 @@ def test_update_ligne_handler():
 
 
     update_ligne_handler(17, chess_board, op)
+
+    os.remove("data/test.op")
 
     assert len(op.tree.childrens) == 1

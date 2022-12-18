@@ -15,13 +15,11 @@ def create_opening(vars):
     name = vars[0]
     color = vars[1].lower() == "white"
     op = opening.Opening(name, color)
-    opening.save(op)
 
 def add_ligne(name):
     op = opening.load(name)
     manage.insert_mode(op)
     root.mainloop()
-    opening.save(op)
 
 def print_tree(name):
     op = opening.load(name)
