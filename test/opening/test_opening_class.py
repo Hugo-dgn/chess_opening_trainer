@@ -34,13 +34,13 @@ def test_add():
 
     assert node_1.childrens is node_2.childrens
 
-def test_deleat():
+def test_delete():
 	op = opening.Opening("caro", chess.BLACK)
 	moves = [chess.Move.from_uci("e2e4"),
 			chess.Move.from_uci("e7e5")]
 	op.add(moves)
 
-	op.deleat(moves)
+	op.delete(moves)
 	assert len(op.tree.childrens) == 0
 
 	op = opening.Opening("caro", chess.BLACK)
@@ -54,6 +54,6 @@ def test_deleat():
 	
 	op.add(moves)
 
-	op.deleat(moves)
+	op.delete(moves)
 
 	assert len(op.tree.childrens) == 1

@@ -107,7 +107,7 @@ class Node:
         -tree : Node
     method:
         -add(ligne : chess.Move list) : add a ligne
-        -deleat(ligne : chess.Move list) : deleat a ligne
+        -delete(ligne : chess.Move list) : deleat a ligne
 
 <function save(op : Opening) : None
     Save the given opening
@@ -146,5 +146,15 @@ get_new_ligne(opening : Opening) : None
 <function insert_mode(op : opening.Opening) : None
     Save all the moves make on the board in the given
     opening and saves it
+
+<function delete_op(name : str) : None
+    remove the given opening from the database
+
+<function delete_ligne(op : opening.Opening, ligne : list)
+    delete an entire ligne from the given opening
+
+<function delete_last_move(op : opening.Opening, ligne :list) : None
+    delete the last move from the given opening
+>>>>>>> delete
 
 ### final implementation of sprint 3 ###
