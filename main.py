@@ -7,8 +7,6 @@ import opening
 
 root = tk.Tk()
 
-board.set_mode(True)
-
 chess_board = board.Board(root, 80)
 chess_board.canvas.pack()
 chess_board.draw()
