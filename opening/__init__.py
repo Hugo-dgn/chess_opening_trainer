@@ -77,7 +77,7 @@ class Opening:
         if node is not None:
             _manage_ligne.clean_ligne(node)
     
-    def deleat(self, ligne):
+    def delete(self, ligne):
         """
         input:
             -self : Opening class

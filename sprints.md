@@ -101,7 +101,7 @@ class Node:
         -tree : Node
     method:
         -add(ligne : chess.Move list) : add a ligne
-        -deleat(ligne : chess.Move list) : deleat a ligne
+        -delete(ligne : chess.Move list) : deleat a ligne
 
 <function save(op : Opening) : None
     Save the given opening
