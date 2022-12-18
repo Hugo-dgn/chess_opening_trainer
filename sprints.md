@@ -132,3 +132,16 @@ manager file:
 get_new_opening(opening) : None
     -update the opening tree in real time
     -use the board to get the moves from the user
+
+### final implementation of sprint 3 ###
+
+<function delete_op(name : str) : None
+    remove the given opening from the database
+
+<function delete_ligne(op : opening.Opening, ligne : list)
+    delete an entire ligne from the given opening
+
+<function delete_last_move(op : opening.Opening, ligne :list) : None
+    delete the last move from the given opening
+
+### final implementation of sprint 3 ###
