@@ -140,3 +140,11 @@ deleate file:
 get_new_ligne(opening : Opening) : None
     -update the opening tree in real time
     -use the board to get the moves from the user
+
+### final implementation of sprint 3 ###
+
+<function insert_mode(op : opening.Opening) : None
+    Save all the moves make on the board in the given
+    opening and saves it
+
+### final implementation of sprint 3 ###
