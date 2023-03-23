@@ -155,6 +155,5 @@ get_new_ligne(opening : Opening) : None
 
 <function delete_last_move(op : opening.Opening, ligne :list) : None
     delete the last move from the given opening
->>>>>>> delete
 
 ### final implementation of sprint 3 ###
