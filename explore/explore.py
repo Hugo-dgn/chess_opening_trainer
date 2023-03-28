@@ -3,9 +3,11 @@ import board
 from explore.explorer import Explorer
 
 def draw_arrow(chess_board, explorer):
-    pass
+    board.delete_arrows(chess_board)
+    for node in explorer.current.childrens:
+        board.draw_arrow(node.move.from_square, node.move.to_square, chess_board)
 
-def train_handler(target_square, chess_board, op, explorer):
+def explore_handler(target_square, chess_board, op, explorer):
     def _get_promotion_type():
         return chess.QUEEN
     move = chess.Move(board.get_hold_piece_case(), target_square)
@@ -14,35 +16,22 @@ def train_handler(target_square, chess_board, op, explorer):
     flag = False
     for next_node in explorer.current.childrens:
         if move == next_node.move:
-            board.set_mode(False)
             explorer.select(next_node)
             chess_board.board.push(move)
             board.change_color_to_move()
-            flag =True
+            draw_arrow(chess_board, explorer)
         elif promotion_move == next_node.move:
-            board.set_mode(False)
             explorer.select(next_node)
             promotion_piece_type = _get_promotion_type()
             promotion_move = chess.Move(board.get_hold_piece_case(), target_square, promotion=promotion_piece_type)
             chess_board.board.push(promotion_move)
             board.change_color_to_move()
-            flag = True
-        if flag:
-            move = explorer.next()
-            chess_board.board.push(move)
-            board.change_color_to_move()
-            board.set_mode(True)
+            draw_arrow(chess_board, explorer)
 
-def train_mode(op, _chess_board):
+def explore_mode(op, _chess_board):
     explorer = Explorer(op)
-    board.set_mode(op.color)
-    if not op.color:
-        move = explorer.next()
-        _chess_board.board.push(move)
-        _chess_board.draw()
-        board.change_color_to_move()
-        board.set_mode(True)
+    board.set_mode(True)
     draw_arrow(_chess_board, explorer)
     board.set_input_handler(
-        lambda target_square, chess_board : train_handler(target_square, chess_board, op, explorer)
+        lambda target_square, chess_board : explore_handler(target_square, chess_board, op, explorer)
         )

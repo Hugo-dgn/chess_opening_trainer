@@ -9,6 +9,7 @@ from . import control as _control
 from .control import get_color_to_move
 from .control import change_color_to_move
 from .control import get_hold_piece_case
+from .draw import draw_arrow, delete_arrows
 
 set_input_handler = _control.set_input_handler
 set_mode = _control.set_mode

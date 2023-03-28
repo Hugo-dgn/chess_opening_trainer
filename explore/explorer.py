@@ -16,7 +16,7 @@ class Explorer(opening.Opening):
         opening.Opening.__init__(self, op.name, op.color)
         self.tree = op.tree
         self.current = op.tree
-        self.choice_function = lambda l : l[0]
+        self.choice_function = lambda l : l[-1]
     
     def next(self):
         next_node = self.choice_function(self.current.childrens)

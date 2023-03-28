@@ -14,6 +14,14 @@ chess_board = board.Board(root, 80)
 chess_board.canvas.pack()
 chess_board.draw()
 
+def check_flip(op):
+    if not op.color:
+        chess_board.is_fliped = True
+        chess_board.draw()
+    else:
+        chess_board.is_fliped = False
+        chess_board.draw()
+
 def create_opening(vars):
     name = vars[1]
     color = vars[0].lower() == "w"
@@ -22,11 +30,19 @@ def create_opening(vars):
 
 def train_opening(name):
     op = opening.load(name)
+    check_flip(op)
     explore.train_mode(op, chess_board)
+    root.mainloop()
+
+def explore_opening(name):
+    op = opening.load(name)
+    check_flip(op)
+    explore.explore_mode(op, chess_board)
     root.mainloop()
 
 def add_ligne(name):
     op = opening.load(name)
+    check_flip(op)
     manage.insert_mode(op)
     root.mainloop()
 
@@ -53,7 +69,8 @@ def main():
                                     "add",
                                     "tree",
                                     "list",
-                                    "train"])
+                                    "train",
+                                    "explore"])
     
     parser.add_argument('vars', nargs='*')
     args = parser.parse_args()
@@ -75,6 +92,9 @@ def main():
     
     elif args.action == "train":
         train_opening(args.vars[0])
+    
+    elif args.action == "explore":
+        explore_opening(args.vars[0])
         
 if __name__ == "__main__":
     main()

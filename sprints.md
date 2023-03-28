@@ -66,7 +66,7 @@ set_mode function:
     get_color_to_move() = False : Black to move
 
 <function change_color_to_move : None
-    does : user_to_move = not user_to_move
+    does : color_to_move = not color_to_move
 
 <function get_hold_piece_case : int
     return the case of the piece selected by the player
