@@ -19,6 +19,11 @@ def create_opening(vars):
     op = opening.Opening(name, color)
     opening.save(op)
 
+def explore_ligne(name):
+    op = opening.load(name)
+    manage.explore_mode(op, chess_board)
+    root.mainloop()
+
 def add_ligne(name):
     op = opening.load(name)
     manage.insert_mode(op)
@@ -27,6 +32,15 @@ def add_ligne(name):
 def print_tree(name):
     op = opening.load(name)
     print(op.tree)
+
+def print_names(args):
+    if len(args) > 0:
+        color = args[0]
+        ops = manage.get_op(color=="w" or color=="white")
+        print([op.name for op in ops])
+    else:
+        ops = manage.get_all_op()
+        print([op.name for op in ops])
 
 def main():
     parser = argparse.ArgumentParser(
@@ -37,7 +51,8 @@ def main():
                                     "delete",
                                     "add",
                                     "tree",
-                                    "list"])
+                                    "list",
+                                    "explore"])
     
     parser.add_argument('vars', nargs='*')
     args = parser.parse_args()
@@ -45,7 +60,7 @@ def main():
     if args.action == "create":
         create_opening(args.vars)
 
-    if args.action == "delete":
+    elif args.action == "delete":
         manage.delete_op(args.vars[0])
     
     elif args.action == "add":
@@ -55,7 +70,10 @@ def main():
         print_tree(args.vars[0])
     
     elif args.action == "list":
-        print(os.listdir("data"))
+        print_names(args.vars)
+    
+    elif args.action == "explore":
+        explore_ligne(args.vars[0])
         
 if __name__ == "__main__":
     main()

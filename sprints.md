@@ -124,7 +124,7 @@ class Node:
 
 <sprint 3 = Package : manage>
 
-Allow player to enter new openings to the database or deleate them.
+Allow the player to enter new openings to the database or deleate them.
 The first implementation of this function will be with command lignes.
 
 >>>files
@@ -157,3 +157,15 @@ get_new_ligne(opening : Opening) : None
     delete the last move from the given opening
 
 ### final implementation of sprint 3 ###
+
+============================================================
+
+<sprint 4 = Package : manage>
+
+Allow the player to navigate its opening present in the
+database
+
+>>>>files
+
+explore file:
+    -gives a list of openings name given some conditions
