@@ -6,6 +6,7 @@ import argparse
 import manage
 import board
 import opening
+import explore
 
 root = tk.Tk()
 
@@ -19,9 +20,9 @@ def create_opening(vars):
     op = opening.Opening(name, color)
     opening.save(op)
 
-def explore_ligne(name):
+def train_opening(name):
     op = opening.load(name)
-    manage.explore_mode(op, chess_board)
+    explore.train_mode(op, chess_board)
     root.mainloop()
 
 def add_ligne(name):
@@ -36,10 +37,10 @@ def print_tree(name):
 def print_names(args):
     if len(args) > 0:
         color = args[0]
-        ops = manage.get_op(color=="w" or color=="white")
+        ops = explore.get_op(color=="w" or color=="white")
         print([op.name for op in ops])
     else:
-        ops = manage.get_all_op()
+        ops = explore.get_all_op()
         print([op.name for op in ops])
 
 def main():
@@ -52,7 +53,7 @@ def main():
                                     "add",
                                     "tree",
                                     "list",
-                                    "explore"])
+                                    "train"])
     
     parser.add_argument('vars', nargs='*')
     args = parser.parse_args()
@@ -72,8 +73,8 @@ def main():
     elif args.action == "list":
         print_names(args.vars)
     
-    elif args.action == "explore":
-        explore_ligne(args.vars[0])
+    elif args.action == "train":
+        train_opening(args.vars[0])
         
 if __name__ == "__main__":
     main()

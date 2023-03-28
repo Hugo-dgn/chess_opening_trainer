@@ -160,7 +160,7 @@ get_new_ligne(opening : Opening) : None
 
 ============================================================
 
-<sprint 4 = Package : manage>
+<sprint 4 = Package : explore>
 
 Allow the player to navigate its opening present in the
 database

@@ -4,38 +4,12 @@ import chess
 
 import opening
 import board
-
-def get_op(color):
-    selected_op = [opening.load(name[:-3]) for name in os.listdir("data") if opening.load(name[:-3]).color == color]
-    return selected_op
-
-def get_all_op():
-    selected_op = [opening.load(name[:-3]) for name in os.listdir("data")]
-    return selected_op
-
-class Explorer(opening.Opening):
-
-    def __init__(self, op):
-        opening.Opening.__init__(self, op.name, op.color)
-        self.tree = op.tree
-        self.current = op.tree
-        self.choice_function = lambda l : l[0]
-    
-    def next(self):
-        next_node = self.choice_function(self.current.childrens)
-        self.current = next_node
-        return next_node.move
-    
-    def select(self, next_node):
-        self.current = next_node
-    
-    def set_choice_function(self, func):
-        self.choice_function = func
+from explore.explorer import Explorer
 
 def draw_arrow(chess_board, explorer):
     pass
 
-def explore_ligne_handler(target_square, chess_board, op, explorer):
+def train_handler(target_square, chess_board, op, explorer):
     def _get_promotion_type():
         return chess.QUEEN
     move = chess.Move(board.get_hold_piece_case(), target_square)
@@ -60,14 +34,14 @@ def explore_ligne_handler(target_square, chess_board, op, explorer):
             chess_board.board.push(move)
             board.change_color_to_move()
 
-def explore_mode(op, _chess_board):
+def train_mode(op, _chess_board):
     explorer = Explorer(op)
     board.set_mode(op.color)
     if not op.color:
         move = explorer.next()
         _chess_board.board.push(move)
         board.change_color_to_move()
-    draw_arrow()
+    draw_arrow(_chess_board, explorer)
     board.set_input_handler(
-        lambda target_square, chess_board : explore_ligne_handler(target_square, chess_board, op, explorer)
+        lambda target_square, chess_board : train_handler(target_square, chess_board, op, explorer)
         )
