@@ -11,8 +11,11 @@ import explore
 root = tk.Tk()
 
 chess_board = board.Board(root, 80)
-chess_board.canvas.pack()
-chess_board.draw()
+
+def start():
+    chess_board.canvas.pack()
+    chess_board.draw()
+    root.mainloop()
 
 def check_flip(op):
     if not op.color:
@@ -32,19 +35,19 @@ def train_opening(name):
     op = opening.load(name)
     check_flip(op)
     explore.train_mode(op, chess_board)
-    root.mainloop()
+    start()
 
 def explore_opening(name):
     op = opening.load(name)
     check_flip(op)
-    explore.explore_mode(op, chess_board)
-    root.mainloop()
+    explore.explore_mode(op, chess_board, root)
+    start()
 
 def add_ligne(name):
     op = opening.load(name)
     check_flip(op)
     manage.insert_mode(op)
-    root.mainloop()
+    start()
 
 def print_tree(name):
     op = opening.load(name)

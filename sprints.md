@@ -168,4 +168,8 @@ database
 >>>>files
 
 explore file:
-    -gives a list of openings name given some conditions
+    -gives a list of openings name given some conditions and allows
+    the player to navigate the openings within a graphic interface
+
+train file:
+    -mange the training

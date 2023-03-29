@@ -17,14 +17,23 @@ class Explorer(opening.Opening):
         self.tree = op.tree
         self.current = op.tree
         self.choice_function = lambda l : l[-1]
+        self.pile = [op.tree]
     
     def next(self):
         next_node = self.choice_function(self.current.childrens)
         self.current = next_node
+        self.pile.append(next_node)
         return next_node.move
     
     def select(self, next_node):
+        self.pile.append(next_node)
         self.current = next_node
+    
+    def pop(self):
+        if len(self.pile) > 1:
+            undo_move = self.pile.pop()
+            self.current = self.pile[-1]
+            return undo_move
     
     def set_choice_function(self, func):
         self.choice_function = func
