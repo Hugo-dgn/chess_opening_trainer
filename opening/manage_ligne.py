@@ -33,7 +33,7 @@ def add_ligne(tree, ligne):
         for child in tree.childrens:
             if ligne[0] == child.move:
                 flag = False
-                add_ligne(child, ligne[1:])
+                return add_ligne(child, ligne[1:])
                 break
         if flag:
             node_ligne = get_node_ligne(ligne, tree)

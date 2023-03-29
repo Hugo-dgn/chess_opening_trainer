@@ -42,7 +42,27 @@ def test_clean_ligne():
     node = ma_ligne.add_ligne(op.tree, moves)
     ma_ligne.clean_ligne(node)
 
-    print(op.tree)
+    assert len(op.tree.childrens) == 2
+
+    node_1 = op.tree.childrens[0].childrens[0]
+    node_2 = op.tree.childrens[1].childrens[0].childrens[0].childrens[0]
+
+    assert node_1.childrens is node_2.childrens
+
+    op = opening.Opening("caro", chess.BLACK)
+    moves = [chess.Move.from_uci("e2e4"),
+            chess.Move.from_uci("e7e5"),
+            chess.Move.from_uci("a2a3")]
+    ma_ligne.add_ligne(op.tree, moves)
+
+    moves = [chess.Move.from_uci("e2e3"),
+            chess.Move.from_uci("e7e6"),
+            chess.Move.from_uci("e3e4"),
+            chess.Move.from_uci("e6e5"),
+            ]
+    
+    node = ma_ligne.add_ligne(op.tree, moves)
+    ma_ligne.clean_ligne(node)
 
     assert len(op.tree.childrens) == 2
 
