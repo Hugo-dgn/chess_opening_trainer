@@ -1,1 +1,1 @@
-This application helps you learning chess opening repertoirs.
+This app helps you learn chess opening repertoires.
