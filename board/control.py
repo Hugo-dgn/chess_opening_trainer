@@ -16,6 +16,17 @@ _current_piece_case = None
 _current_image = None
 _current_image_id = None
 
+def reset():
+    global _user_to_move, _color_to_move, _current_piece
+    global _current_piece_case, _current_image, _current_image_id
+    _user_to_move = False
+    _color_to_move = chess.WHITE
+    _current_piece = None
+    _current_piece_case = None
+    _current_image = None
+    _current_image_id = None
+
+
 def click(case_size, board, isfliped, draw_function, canvas, event):
     """
     input:

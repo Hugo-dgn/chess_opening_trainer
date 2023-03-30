@@ -73,6 +73,7 @@ class Board:
             n_case += n
     
     def reset(self):
+        _control.reset()
         self.board = chess.Board()
         self._current_image = []
         self.draw()

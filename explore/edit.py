@@ -1,5 +1,8 @@
 import chess
+
 import board
+import opening
+
 from explore.explorer import Explorer
 import explore.action as action
 import explore.display as display
@@ -9,6 +12,8 @@ def event_manager(event, _chess_board, explorer):
         action.back(event, _chess_board, explorer)
     elif event.keycode == 46:
         action.delete(event, _chess_board, explorer)
+    elif event.keycode == 83:
+        opening.save(explorer.op)
 
 def edit_handler(target_square, chess_board, op, explorer):
     def _get_promotion_type():

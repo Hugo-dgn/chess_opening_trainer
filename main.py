@@ -10,7 +10,7 @@ import explore
 
 root = tk.Tk()
 
-chess_board = board.Board(root, 80)
+chess_board = board.Board(root, 60)
 
 def start():
     chess_board.canvas.pack()

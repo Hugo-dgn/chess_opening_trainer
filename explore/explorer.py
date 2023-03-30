@@ -13,6 +13,7 @@ def get_all_op():
 class Explorer():
 
     def __init__(self, op):
+        self.color = op.color
         self.op = op
         self.tree = op.tree
         self.current = op.tree

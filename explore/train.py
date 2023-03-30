@@ -8,7 +8,7 @@ def manage_end(chess_board, explorer):
     if len(explorer.current.childrens) == 0:
         set_up(explorer, chess_board)
 
-def train_handler(target_square, chess_board, op, explorer):
+def train_handler(target_square, chess_board, explorer):
     def _get_promotion_type():
         return chess.QUEEN
     move = chess.Move(board.get_hold_piece_case(), target_square)
@@ -59,5 +59,5 @@ def train_mode(op, _chess_board):
     explorer.set_choice_function(chose_next_move)
     set_up(explorer, _chess_board)
     board.set_input_handler(
-        lambda target_square, chess_board : train_handler(target_square, chess_board, op, explorer)
+        lambda target_square, chess_board : train_handler(target_square, chess_board, explorer)
         )
