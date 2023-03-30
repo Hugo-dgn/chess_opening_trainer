@@ -87,3 +87,14 @@ class Opening:
         deleat ligne from opening tree
         """
         _manage_ligne.deleat_ligne(self.tree, ligne)
+    
+    def delete_last_move(self, ligne):
+        """
+        input:
+            -self : Opening class
+            -ligne : chess.Move list
+        output:
+            -None
+        deleat last move from opening tree
+        """
+        _manage_ligne.delete_last_move(self.tree, ligne)

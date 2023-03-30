@@ -115,8 +115,11 @@ class Node:
 <function load(op_name : str) : Opening
     load the opening corresponding to the given name
 
-<funciton oplist() : str list
+<function oplist() : str list
     gives a list of the names of all openings saved
+
+<function delete_last_move(list : line)
+    delete the last move of the line
 
 ### final implementation of sprint 2 ###
 
@@ -150,12 +153,6 @@ get_new_ligne(opening : Opening) : None
 <function delete_op(name : str) : None
     remove the given opening from the database
 
-<function delete_ligne(op : opening.Opening, ligne : list)
-    delete an entire ligne from the given opening
-
-<function delete_last_move(op : opening.Opening, ligne :list) : None
-    delete the last move from the given opening
-
 ### final implementation of sprint 3 ###
 
 ============================================================
@@ -173,3 +170,22 @@ explore file:
 
 train file:
     -mange the training
+
+### final implementation of sprint 3 ###
+
+<function get_all_op() : list
+    gives a list of all the opening save in folder data
+
+<function get_op(color : chess.color) : list
+    gives all saved opening for the specify color
+
+<function train_mode(op : opening.Opening, board : board.Board) : None
+    starts a training session
+
+<function explore_mode(op : opening.Opening, board : board.Board, root : tk.Tk) : None
+    allow the user to navigate an opening (read only). To go back one move use the left arrow
+
+<function edit_mode(op : opening.Opening, board : board.Board, root : tk.Tk) : None
+    allow the user to edit an opening. To go back one move use the left arrow. To delete a move user suppr.
+
+### final implementation of sprint 3 ###

@@ -89,3 +89,14 @@ def test_deleat_ligne():
 
     ma_ligne.deleat_ligne(op.tree, moves)
     assert len(op.tree.childrens) == 0
+
+def test_delete_last_move():
+    op = opening.Opening("caro", chess.BLACK)
+    moves = [chess.Move.from_uci("e2e4"),
+            chess.Move.from_uci("e7e5")]
+    op.add(moves)
+
+    ma_ligne.delete_last_move(op.tree, moves)
+    print(op.tree)
+    assert len(op.tree.childrens) == 1
+    assert len(op.tree.childrens[0].childrens) == 0

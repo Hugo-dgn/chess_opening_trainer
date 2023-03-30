@@ -10,20 +10,21 @@ def get_all_op():
     selected_op = [opening.load(name[:-3]) for name in os.listdir("data")]
     return selected_op
 
-class Explorer(opening.Opening):
+class Explorer():
 
     def __init__(self, op):
-        opening.Opening.__init__(self, op.name, op.color)
+        self.op = op
         self.tree = op.tree
         self.current = op.tree
         self.choice_function = lambda l : l[-1]
         self.pile = [op.tree]
     
     def next(self):
-        next_node = self.choice_function(self.current.childrens)
-        self.current = next_node
-        self.pile.append(next_node)
-        return next_node.move
+        if len(self.current.childrens) > 0:
+            next_node = self.choice_function(self.current.childrens)
+            self.current = next_node
+            self.pile.append(next_node)
+            return next_node.move
     
     def select(self, next_node):
         self.pile.append(next_node)
@@ -37,3 +38,7 @@ class Explorer(opening.Opening):
     
     def set_choice_function(self, func):
         self.choice_function = func
+    
+    def reset(self):
+        self.current = self.tree
+        self.pile = [self.tree]

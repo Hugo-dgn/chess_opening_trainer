@@ -63,6 +63,10 @@ def find_node(node, ligne):
     the ligne is not in the tree
     """
     if node.move is None:
+        if len(ligne) == 1:
+            for next_node in node.childrens:
+                if next_node.move == ligne[0]:
+                    return next_node
         for start_node in node.childrens:
             final_node = find_node(start_node, ligne[1:])
             if final_node is not None:
@@ -93,3 +97,12 @@ def deleat_ligne(op_tree, ligne):
             node.parents[0].childrens.remove(node)
             aux(node.parents[0])
     aux(end_node)
+
+def delete_last_move(op_tree, ligne):
+    end_node = find_node(op_tree, ligne)
+    if len(ligne) > 1:
+        before_last_node = find_node(op_tree, ligne[:-1])
+    else:
+        before_last_node = op_tree
+    before_last_node.childrens.remove(end_node)
+

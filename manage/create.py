@@ -19,7 +19,6 @@ def update_ligne_handler(target_square, chess_board, op):
     
     ligne = chess_board.board.move_stack
     op.add(ligne)
-    opening.save(op)
 
 def insert_mode(op):
     board.set_mode(True)

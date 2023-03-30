@@ -43,11 +43,19 @@ def explore_opening(name):
     explore.explore_mode(op, chess_board, root)
     start()
 
+def edit_opening(name):
+    op = opening.load(name)
+    check_flip(op)
+    explore.edit_mode(op, chess_board, root)
+    start()
+    opening.save(op)
+
 def add_ligne(name):
     op = opening.load(name)
     check_flip(op)
     manage.insert_mode(op)
     start()
+    opening.save(op)
 
 def print_tree(name):
     op = opening.load(name)
@@ -57,10 +65,12 @@ def print_names(args):
     if len(args) > 0:
         color = args[0]
         ops = explore.get_op(color=="w" or color=="white")
-        print([op.name for op in ops])
+        for op in ops:
+            print(op.name)
     else:
         ops = explore.get_all_op()
-        print([op.name for op in ops])
+        for op in ops:
+            print(op.name)
 
 def main():
     parser = argparse.ArgumentParser(
@@ -73,7 +83,8 @@ def main():
                                     "tree",
                                     "list",
                                     "train",
-                                    "explore"])
+                                    "explore",
+                                    "edit"])
     
     parser.add_argument('vars', nargs='*')
     args = parser.parse_args()
@@ -98,6 +109,8 @@ def main():
     
     elif args.action == "explore":
         explore_opening(args.vars[0])
+    elif args.action == "edit":
+        edit_opening(args.vars[0])
         
 if __name__ == "__main__":
     main()
