@@ -179,8 +179,8 @@ train file:
 <function get_op(color : chess.color) : list
     gives all saved opening for the specify color
 
-<function train_mode(op : opening.Opening, board : board.Board) : None
-    starts a training session
+<function train_mode(op : opening.Opening, board : board.Board, root : tk.Tk()) : None
+    starts a training session. Press leftarrow to show the right move
 
 <function explore_mode(op : opening.Opening, board : board.Board, root : tk.Tk) : None
     allow the user to navigate an opening (read only). To go back one move use the left arrow

@@ -34,7 +34,7 @@ def create_opening(vars):
 def train_opening(name):
     op = opening.load(name)
     check_flip(op)
-    explore.train_mode(op, chess_board)
+    explore.train_mode(op, chess_board, root)
     start()
 
 def explore_opening(name):

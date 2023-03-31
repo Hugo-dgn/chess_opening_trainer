@@ -4,6 +4,12 @@ import chess
 import board
 from explore.explorer import Explorer
 
+import explore.display as display
+
+def event_manager(event, _chess_board, explorer):
+    if event.keycode == 37:
+        display.draw_arrow(_chess_board, explorer)
+
 def manage_end(chess_board, explorer):
     if len(explorer.current.childrens) == 0:
         set_up(explorer, chess_board)
@@ -31,6 +37,7 @@ def train_handler(target_square, chess_board, explorer):
             board.change_color_to_move()
             flag = True
         if flag:
+            board.delete_arrows(chess_board)
             move = explorer.next()
             if move is not None:
                 chess_board.board.push(move)
@@ -54,9 +61,10 @@ def set_up(explorer, chess_board):
         board.set_mode(True)
     chess_board.draw()
 
-def train_mode(op, _chess_board):
+def train_mode(op, _chess_board, root):
     explorer = Explorer(op)
     explorer.set_choice_function(chose_next_move)
+    root.bind("<Key>", lambda event : event_manager(event, _chess_board, explorer))
     set_up(explorer, _chess_board)
     board.set_input_handler(
         lambda target_square, chess_board : train_handler(target_square, chess_board, explorer)
